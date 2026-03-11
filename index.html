@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>敘‧XHALE | 台北赤峰街歐風復古咖啡館 - 早午餐、下午茶、甜點</title>
+    <meta name="description" content="敘‧XHALE 位於台北中山站赤峰街,提供精緻早午餐、招牌鍋煎鬆餅與手作咖啡。歐風復古空間,紅磚牆與皮革座椅,適合約會聚餐與午後放空。營業時間11:30-19:30。">
+    <meta name="keywords" content="台北中山站咖啡廳,赤峰街早午餐,赤峰街下午茶,敘‧XHALE,台北歐風咖啡館,鍋煎鬆餅,赤峰街咖啡">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="敘‧XHALE | 台北赤峰街歐風復古咖啡館">
+    <meta property="og:description" content="在赤峰街,留一段慢下來的時間。歐風空間、溫暖光影與舒服餐點,陪你度過剛剛好的早午餐與午後時光。">
+    <meta property="og:image" content="https://api.kuse.ai/api/folder/v1/file/089746a5d123beafd37013b63dbf8c3fa8b74e9c467c20621f8ee75dae851eb9_2156705.jpeg">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_TW">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "敘‧XHALE",
+      "image": "https://api.kuse.ai/api/folder/v1/file/089746a5d123beafd37013b63dbf8c3fa8b74e9c467c20621f8ee75dae851eb9_2156705.jpeg",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "赤峰街35-1號",
+        "addressLocality": "大同區",
+        "addressRegion": "台北市",
+        "addressCountry": "TW"
+      },
+      "telephone": "+886-2-2552-2285",
+      "servesCuisine": "Cafe, Brunch, Dessert",
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "11:30",
+        "closes": "19:30"
+      }
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --cream-white: #FFF8F0;
+            --cream-light: #FAF6F1;
+            --caramel: #A0826D;
+            --caramel-dark: #8B6F47;
+            --coffee-dark: #3E2723;
+            --coffee-medium: #4E342E;
+            --brick-red: #A0522D;
+            --brick-dark: #8B4513;
+            --brass: #B8860B;
+            --brass-light: #DAA520;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--coffee-dark);
+            background: var(--cream-white);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', 'Noto Serif TC', serif;
+        }
+        
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+        
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--coffee-dark);
+            letter-spacing: 0.3em;
+            animation: fadeInOut 2s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--brass), var(--brick-red));
+            z-index: 9998;
+            transition: width 0.1s ease;
+        }
+        
+        /* Sticky Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9997;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(160, 130, 109, 0.1);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 2px 20px rgba(62, 39, 35, 0.08);
+        }
+        
+        .nav-link {
+            color: var(--coffee-dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-link:hover {
+            color: var(--brick-red);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://api.kuse.ai/api/folder/v1/file/089746a5d123beafd37013b63dbf8c3fa8b74e9c467c20621f8ee75dae851eb9_2156705.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(62, 39, 35, 0.6) 0%, rgba(139, 111, 71, 0.4) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 2rem;
+            animation: heroFadeIn 1.5s ease-out;
+        }
+        
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--brass);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--brass-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--coffee-dark);
+            transform: translateY(-2px);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: scrollDot 2s infinite;
+        }
+        
+        @keyframes scrollDot {
+            0% {
+                top: 10px;
+                opacity: 1;
+            }
+            100% {
+                top: 30px;
+                opacity: 0;
+            }
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--caramel);
+            font-size: 1rem;
+            margin-bottom: 4rem;
+            letter-spacing: 0.15em;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Brand Story */
+        .brand-story {
+            background: var(--cream-light);
+        }
+        
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .story-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: var(--coffee-medium);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Highlights */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .highlight-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 4px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(160, 130, 109, 0.1);
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(62, 39, 35, 0.12);
+        }
+        
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--brass);
+        }
+        
+        .highlight-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .highlight-desc {
+            color: var(--caramel-dark);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        
+        /* Menu */
+        .menu {
+            background: var(--cream-white);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .menu-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(160, 130, 109, 0.1);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.15);
+        }
+        
+        .menu-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .menu-card:hover .menu-image {
+            transform: scale(1.08);
+        }
+        
+        .menu-content {
+            padding: 2rem;
+        }
+        
+        .menu-category {
+            color: var(--brass);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .menu-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .menu-price {
+            color: var(--brick-red);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .menu-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        /* Space Gallery */
+        .space {
+            background: var(--cream-light);
+        }
+        
+        .space-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .space-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            height: 400px;
+        }
+        
+        .space-item:first-child {
+            grid-row: span 2;
+            height: auto;
+        }
+        
+        .space-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .space-item:hover .space-image {
+            transform: scale(1.1);
+        }
+        
+        .space-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(62, 39, 35, 0.9), transparent);
+            color: white;
+            padding: 2rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .space-item:hover .space-caption {
+            opacity: 1;
+        }
+        
+        /* Visit Info */
+        .visit-info {
+            background: var(--coffee-dark);
+            color: white;
+        }
+        
+        .visit-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 3rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .info-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+            color: var(--brass-light);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .info-icon {
+            margin-right: 1rem;
+            font-size: 1.3rem;
+            color: var(--brass-light);
+            min-width: 30px;
+        }
+        
+        .info-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--coffee-dark);
+        }
+        
+        .btn-light:hover {
+            background: var(--brass-light);
+            color: white;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 450px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Reviews */
+        .reviews {
+            background: var(--cream-white);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--brass);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(160, 130, 109, 0.1);
+            border-left: 4px solid var(--brass);
+        }
+        
+        .review-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1);
+        }
+        
+        .review-quote {
+            font-size: 3rem;
+            color: var(--brass);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+        
+        .review-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--coffee-medium);
+            font-style: italic;
+        }
+        
+        /* FAQ */
+        .faq {
+            background: var(--cream-light);
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(160, 130, 109, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--cream-light);
+        }
+        
+        .faq-answer {
+            padding: 0 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: var(--caramel-dark);
+            line-height: 1.8;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1.5rem 2rem;
+            max-height: 300px;
+        }
+        
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--brass);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--coffee-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            color: var(--brass-light);
+        }
+        
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--brass-light);
+            font-weight: 500;
+        }
+        
+        .footer-link {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .footer-link:hover {
+            color: var(--brass-light);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--brass);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        .kuse-branding {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .kuse-branding:hover {
+            color: var(--brass-light);
+            cursor: pointer;
+        }
+        
+        .kuse-branding svg {
+            height: 1em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .visit-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .space-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .space-item:first-child {
+                grid-row: span 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 0.05em;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.05rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.6rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .highlights-grid,
+            .menu-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .space-item {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">敘‧XHALE</div>
+    </div>
+    
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; letter-spacing: 0.15em; color: var(--coffee-dark);">
+                敘‧XHALE
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="#hero" class="nav-link">首頁</a>
+                <a href="#story" class="nav-link">品牌故事</a>
+                <a href="#menu" class="nav-link">菜單精選</a>
+                <a href="#space" class="nav-link">空間氛圍</a>
+                <a href="#visit" class="nav-link">到店資訊</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">在赤峰街,留一段慢下來的時間。</h1>
+            <p class="hero-subtitle">敘‧XHALE,以歐風空間、溫暖光影與舒服餐點,陪你度過一段剛剛好的早午餐與午後時光。</p>
+            <div class="hero-cta">
+                <a href="#menu" class="btn btn-primary">查看菜單</a>
+                <a href="https://maps.google.com/?q=台北市大同區赤峰街35-1號" target="_blank" class="btn btn-secondary">立即導航</a>
+                <a href="tel:02-2552-2285" class="btn btn-secondary">立即致電</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+    
+    <!-- Brand Story -->
+    <section class="brand-story" id="story">
+        <div class="container">
+            <h2 class="section-title">關於敘‧XHALE</h2>
+            <p class="section-subtitle">A PLACE TO EXHALE</p>
+            <div class="story-content">
+                <p class="story-text">
+                    在台北的步調裡,我們都需要一個能停下來、好好呼吸的地方。
+                </p>
+                <p class="story-text">
+                    敘‧XHALE 座落於赤峰街巷弄,保留了老宅的溫度,融入歐風復古的氛圍。紅磚牆、皮革座椅、午後斜射進來的光影,還有手沖咖啡的香氣,構成一個讓人願意坐下來、放慢腳步的空間。
+                </p>
+                <p class="story-text">
+                    這裡適合一個人來放空,也適合與朋友相聚;適合翻開一本書,也適合什麼都不做。我們相信,好的餐點與空間,能讓人在城市裡找回屬於自己的節奏。
+                </p>
+                <p class="story-text">
+                    在這裡,時間是用來品嚐的。
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Highlights -->
+    <section id="highlights">
+        <div class="container">
+            <h2 class="section-title">招牌亮點</h2>
+            <p class="section-subtitle">WHAT MAKES US SPECIAL</p>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🥞</div>
+                    <h3 class="highlight-title">招牌鍋煎鬆餅</h3>
+                    <p class="highlight-desc">手工現做的鬆軟鬆餅,搭配季節水果與特製糖漿,每一口都是幸福的滋味。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🏛️</div>
+                    <h3 class="highlight-title">舒適歐風空間</h3>
+                    <p class="highlight-desc">復古紅磚、皮革座椅、溫暖燈光,打造讓人放鬆的午後時光。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">☕</div>
+                    <h3 class="highlight-title">早午餐與下午茶</h3>
+                    <p class="highlight-desc">從豐盛早午餐到精緻下午茶,滿足不同時段的味蕾需求。</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">📍</div>
+                    <h3 class="highlight-title">中山站散步可達</h3>
+                    <p class="highlight-desc">位於赤峰街商圈核心,捷運中山站步行5分鐘,交通便利。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Menu Preview -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <h2 class="section-title">菜單精選</h2>
+            <p class="section-subtitle">SIGNATURE DISHES</p>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="https://api.kuse.ai/api/folder/v1/file/6794f906664ab592f0ee875898cb736f258b7e375e1fce2116559894e08dfff7_2156729.jpeg" alt="珍珠奶茶鍋煎鬆餅" class="menu-image">
+                    <div class="menu-content">
+                        <div class="menu-category">鍋煎鬆餅 PANCAKES</div>
+                        <h3 class="menu-name">珍珠奶茶鍋煎鬆餅</h3>
+                        <div class="menu-price">NT$ 280</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://api.kuse.ai/api/folder/v1/file/de38031d0dbce7af3e51c4c6e1ec272883f2f558d57af63f5f7736b84feb1dec_2156766.jpeg" alt="黑糖拿鐵" class="menu-image">
+                    <div class="menu-content">
+                        <div class="menu-category">咖啡 & 拿鐵 COFFEE & LATTE</div>
+                        <h3 class="menu-name">黑糖拿鐵</h3>
+                        <div class="menu-price">NT$ 180</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <img src="https://api.kuse.ai/api/folder/v1/file/5352c9842ac837791583798169abf285fc28988dc38c9211e102682950dce274_2156802.jpeg" alt="煙燻鮭魚沙拉" class="menu-image">
+                    <div class="menu-content">
+                        <div class="menu-category">沙拉 SALAD</div>
+                        <h3 class="menu-name">煙燻鮭魚沙拉</h3>
+                        <div class="menu-price">NT$ 300</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div style="width: 100%; height: 280px; background: linear-gradient(135deg, var(--caramel) 0%, var(--brick-red) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; letter-spacing: 0.1em;">
+                        經典早午餐盤
+                    </div>
+                    <div class="menu-content">
+                        <div class="menu-category">早午餐 BRUNCH</div>
+                        <h3 class="menu-name">經典早午餐盤</h3>
+                        <div class="menu-price">NT$ 320</div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-cta">
+                <a href="#visit" class="btn btn-primary">查看完整菜單</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Space & Atmosphere -->
+    <section class="space" id="space">
+        <div class="container">
+            <h2 class="section-title">空間氛圍</h2>
+            <p class="section-subtitle">SPACE & ATMOSPHERE</p>
+            <div class="space-grid">
+                <div class="space-item">
+                    <img src="https://api.kuse.ai/api/folder/v1/file/e9d30fe0c38fb15d0aec3f69319b35a6b59ea579a696e48e44bb0f433a30a572_2156854.jpeg" alt="復古咖啡館角落" class="space-image">
+                    <div class="space-caption">坐進光影裡,讓一杯咖啡把時間放慢。</div>
+                </div>
+                <div class="space-item">
+                    <img src="https://api.kuse.ai/api/folder/v1/file/d2fe1ecc8301a903b8b82d7efe9f40be2779f4723af0b098903b5d813bc80f3b_2156882.jpeg" alt="赤峰街外觀" class="space-image">
+                    <div class="space-caption">隱身赤峰街巷弄,等待你的發現。</div>
+                </div>
+                <div class="space-item">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, var(--coffee-dark) 0%, var(--caramel) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; letter-spacing: 0.1em; padding: 2rem; text-align: center;">
+                        歐風復古<br>溫暖午後
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Visit Info -->
+    <section class="visit-info" id="visit">
+        <div class="container">
+            <div class="visit-content">
+                <div class="info-card">
+                    <h2 class="info-title">到店資訊</h2>
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <strong>地址</strong><br>
+                            台北市大同區赤峰街35-1號
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📞</span>
+                        <div>
+                            <strong>電話</strong><br>
+                            02-2552-2285
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🕐</span>
+                        <div>
+                            <strong>營業時間</strong><br>
+                            每日 11:30 – 19:30
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🚇</span>
+                        <div>
+                            <strong>交通方式</strong><br>
+                            捷運中山站步行5分鐘<br>
+                            赤峰街商圈核心位置
+                        </div>
+                    </div>
+                    <div class="info-buttons">
+                        <a href="https://maps.google.com/?q=台北市大同區赤峰街35-1號" target="_blank" class="btn btn-light">Google Maps 導航</a>
+                        <a href="tel:02-2552-2285" class="btn btn-light">撥打電話預約</a>
+                        <a href="#menu" class="btn btn-light">查看線上菜單</a>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3614.4842547891144!2d121.52039931500658!3d25.053324083966877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a96f8e6e6e6f%3A0x0!2zMjXCsDAzJzEyLjAiTiAxMjHCsDMxJzIxLjYiRQ!5e0!3m2!1szh-TW!2stw!4v1234567890123!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title">顧客心聲</h2>
+            <p class="section-subtitle">WHAT PEOPLE SAY</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-quote">"</div>
+                    <p class="review-text">很適合在午後帶著筆電或一本書,坐上一整個舒服的時段。空間不會太吵,咖啡跟甜點都很有水準。</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-quote">"</div>
+                    <p class="review-text">空間有種歐洲街角咖啡館的感覺,甜點跟飲品都很有記憶點。尤其是鬆餅,真的會想再訪。</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-quote">"</div>
+                    <p class="review-text">赤峰街散步到一半,很容易就想進來坐一下。裝潢復古有質感,餐點份量剛好,整體體驗很舒服。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">常見問題</h2>
+            <p class="section-subtitle">FAQ</p>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>需要預約嗎?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        平日建議直接來訪即可,假日人潮較多建議先致電預約,以確保有位置。電話:02-2552-2285
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>有提供素食選項嗎?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        有的,我們提供多款素食沙拉、鬆餅與飲品選擇。詳細菜單可洽詢現場服務人員。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>店內有低消或用餐時間限制嗎?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        每人低消一杯飲品,平日不限時,假日尖峰時段用餐時間為90分鐘。我們希望大家都能舒服地享受時光。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>可以攜帶寵物嗎?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        歡迎攜帶友善寵物,請記得使用牽繩或提籠,並保持環境整潔。讓我們一起營造舒適的空間。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">敘‧XHALE</div>
+                <p class="footer-tagline">在赤峰街,留一段慢下來的時間。<br>以歐風空間與溫暖餐點,陪你度過剛剛好的午後時光。</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">快速連結</div>
+                <a href="#story" class="footer-link">品牌故事</a>
+                <a href="#menu" class="footer-link">菜單精選</a>
+                <a href="#space" class="footer-link">空間氛圍</a>
+                <a href="#visit" class="footer-link">到店資訊</a>
+            </div>
+            <div>
+                <div class="footer-title">聯絡資訊</div>
+                <a href="tel:02-2552-2285" class="footer-link">02-2552-2285</a>
+                <a href="https://maps.google.com/?q=台北市大同區赤峰街35-1號" target="_blank" class="footer-link">台北市大同區赤峰街35-1號</a>
+                <p class="footer-link" style="cursor: default;">每日 11:30 – 19:30</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 敘‧XHALE. All rights reserved.</p>
+            <a href="https://kuse.ai" target="_blank" class="kuse-branding">
+                <span>made with</span>
+                <svg viewBox="0,0,160,44" xmlns="http://www.w3.org/2000/svg"><path d="m.01,20.65C-.43,8.25,9.3-2.03,22.04.34,34.78,2.72,43.29,8.32,43.29,22.9s-8.66,19.01-22.03,20.3C7.9,44.5.46,33.05.01,20.65z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="m146.76,7.94c8.07,0,13.24,6.15,13.24,14.58v1.39h-20.75c.45,4.05,3.51,7.37,8.57,7.37,2.62,0,5.73-1.05,7.62-2.94l2.67,3.83c-2.67,2.55-6.62,3.88-10.9,3.88-8.07,0-14.08-5.6-14.08-14.08,0-7.76,5.67-14.02,13.63-14.02zm0,4.77c-5.01,0-7.29,3.83-7.57,7.1h15.13c-.11-3.16-2.28-7.1-7.57-7.1z" fill="currentColor"/><path d="m86.64,24.49c0,4.15,2.39,6.84,6.84,6.84,4.4,0,6.84-2.69,6.84-6.84V8.55h5.37v16.33c0,6.7-4.06,11.14-12.21,11.14-8.21,0-12.21-4.5-12.21-11.09V8.55h5.37v15.94zm32.99-16.55c4.49,0,8.06,1.47,10.6,3.86l-2.59,3.81c-2.05-2-5.28-3.08-8.06-3.08-2.88,0-4.84,1.37-4.84,3.32,0,1.91,2.64,2.54,5.81,3.27,4.59,1.08,10.26,2.4,10.26,8.46,0,4.94-3.76,8.41-11.14,8.41-4.98,0-8.94-1.76-11.24-4.11l2.54-4.11c1.86,1.91,5.18,3.67,8.84,3.67,3.91,0,5.57-1.66,5.57-3.62,0-2.3-2.88-2.98-6.21-3.76-4.54-1.08-9.87-2.3-9.87-8.06,0-4.5,4.2-8.06,10.31-8.06zM60.79,20.82,71.44,8.55h6.5L66.46,21.26,78.82,35.44h-6.5l-9.28-11.1-2.25,2.49v8.6h-5.33V8.55h5.33v12.27z" fill="currentColor"/></svg>
+            </a>
+        </div>
+    </footer>
+    
+    <script>
+        // Loading Screen
+        window.addEventListener(`load`, () => {
+            const loadingScreen = document.getElementById(`loadingScreen`);
+            setTimeout(() => {
+                loadingScreen.classList.add(`fade-out`);
+            }, 1500);
+        });
+        
+        // Scroll Progress
+        window.addEventListener(`scroll`, () => {
+            const scrollProgress = document.getElementById(`scrollProgress`);
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + `%`;
+        });
+        
+        // Navbar Scroll Effect
+        const navbar = document.getElementById(`navbar`);
+        window.addEventListener(`scroll`, () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add(`scrolled`);
+            } else {
+                navbar.classList.remove(`scrolled`);
+            }
+        });
+        
+        // Smooth Scroll
+        document.querySelectorAll(`a[href^="#"]`).forEach(anchor => {
+            anchor.addEventListener(`click`, function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute(`href`));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: `smooth`
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for Sections
+        const sections = document.querySelectorAll(`section`);
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: `0px 0px -100px 0px`
+        };
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add(`visible`);
+                }
+            });
+        }, observerOptions);
+        
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll(`.faq-item`);
+        faqItems.forEach(item => {
+            const question = item.querySelector(`.faq-question`);
+            question.addEventListener(`click`, () => {
+                const isActive = item.classList.contains(`active`);
+                
+                faqItems.forEach(faq => faq.classList.remove(`active`));
+                
+                if (!isActive) {
+                    item.classList.add(`active`);
+                }
+            });
+        });
+        
+        // Parallax Effect for Hero
+        window.addEventListener(`scroll`, () => {
+            const scrolled = window.scrollY;
+            const heroBg = document.querySelector(`.hero-bg`);
+            if (heroBg && scrolled < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+    
+    <script src="https://cdn.kuse.ai/sdk.prd.js"></script>
+</body>
+</html>
